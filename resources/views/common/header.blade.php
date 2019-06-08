@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="row">
   <div class="col-md-3">
     <a class="logo" href="index.php"><img src="<?PHP echo Storage::url('img/logo_hoja.png') ?>" width="300" alt="logo" ></a>    
@@ -35,4 +32,3 @@
 		</nav>
  	</div>	
 </div>
-@endsection
