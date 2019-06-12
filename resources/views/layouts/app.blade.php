@@ -85,7 +85,8 @@
 
         <main class="py-4">
         	
-        	@include('common/navbar')
+        	@includeWhen(!Route::is('login') &&  !Route::is('register'), 'common/navbar')
+        	
         	
           @yield('content')
           

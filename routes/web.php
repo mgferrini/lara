@@ -19,20 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/miPrimeraRuta', function (){
-	echo 'mi primer ruta en Lara';
-});
-
-Route::get('/resultado/{numero}/{numero2?}', function ($i,$j=0){
-	if (empty($j)){
-		
-		echo "recibi el numero: $i";	
-	}else {
-	 	echo "reaultado: " . $i * $j;	
-	}
-	
-});
+Route::resource('categorias', 'CategoriaController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
