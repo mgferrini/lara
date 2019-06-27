@@ -18,14 +18,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/test', function () {
+    return App\Categorie::with('subCategorie')->where('parent', '=', '0' )->get();
+});
+
 Auth::routes();
-Route::resource('categorias', 'CategoriaController');
+Route::resource('categories', 'CategorieController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::view('/nombrePagina', 'algunaPagina.php');
 Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba');
-
-Route::get('/peliculas', 'PeliculasController@index');
-Route::get('/peliculas/{id}', 'PeliculasController@buscarPeliculaId');
-Route::get('/peliculas/buscar/{nombre}', 'PeliculasController@buscarPeliculaNombre');

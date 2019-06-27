@@ -1,28 +1,36 @@
 <div class="row">
   <div class="col-md-12">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        </button>
+      </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link navCat" href="">JABONES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navCat" href="#">ACEITES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navCat" href="#">CREMAS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link navCat" href="#"  > CABELLO </a>
-          </li>
-          <li class="nav-item navCat">
+          @foreach(App\Categorie::with('subCategorie')->where('parent', '=', '0' )->get() as $item)
+            @if($item->subCategorie->count()>0)
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{$item->name}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  @foreach($item->subCategorie as $subCategorie)
+                    <a class="dropdown-item" href="#">{{$subCategorie->name}}</a>
+                  @endforeach
+                </div>
+              </li>
+            @else
+              <li class="nav-item">
+                <a class="nav-link" href="#">{{$item->name}}</a>
+              </li>
+            @endif
+
+          @endforeach
+          <li class="navCat">
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-1 icon" type="search" placeholder="" aria-label="Search">
-              <a class="fas fa-search nav-item fa-lg icon" type="submit" ></a>
+              <a class="fas fa-search nav-item fa-lg icon" type="submit"></a>
             </form>
           </li>
         </ul>
@@ -30,3 +38,4 @@
     </nav>
   </div>
 </div>
+

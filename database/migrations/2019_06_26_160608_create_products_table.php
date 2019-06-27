@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriasTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateCategoriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 50);
-            $table->boolean('top'); // indica si la categoria es de primer nivel
-            $table->bigInteger('parent'); // indica cual es la categoria padre
-            $table->string('banner_file', 100)->nullable();
             $table->timestamps();
+            $table->integer('categorie_id');
+            $table->char('name',50);            
+            $table->text('description');
+            $table->integer('stock');
+            $table->double('value',10,2);
+            $table->char('image',100);
         });
     }
 
@@ -30,6 +32,6 @@ class CreateCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('products');
     }
 }
