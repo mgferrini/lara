@@ -85,14 +85,14 @@
 
         <main class="py-4">
         	
-        	@includeWhen(!Route::is('login') &&  !Route::is('register'), 'common/navbar')
+        	@includeWhen(!Route::is('login') &&  !Route::is('register'), 'partials/navbar')
         	
         	
           @yield('content')
           
         </main>
     </div>
-    @include('common/footer')
+    @include('partials/footer')
 
 
 </body>

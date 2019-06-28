@@ -21,6 +21,6 @@
     </div>
 </div>-->
 
-@include('common/carousel')
+@include('partials/carousel')
 
 @endsection
