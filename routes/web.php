@@ -19,13 +19,24 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return App\Categorie::with('subCategorie')->where('parent', '=', '0' )->get();
+    //return App\Category::with('subCategory')->where('parent', '=', '0' )->get();
 });
 
+Route::get('/category/{numero}/show', 'CategoryController@showCategoryProducts');
+
 Auth::routes();
-Route::resource('categories', 'CategorieController');
+Route::resource('category', 'CategoryController');
+Route::resource('product', 'ProductController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::view('/nombrePagina', 'algunaPagina.php');
+// Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba')->middleware('auth');
 Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba');
+/*
+Route::group(['middleware' =>'midllewareGenerico'], function (){
+	Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba')->middleware('midllewareEspeficicoParaEstaRuta') ;
+	Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba');
+	Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba');
+	Route::get('/prueba/{numero}/{marca}', 'HomeController@prueba');
+});

@@ -7,22 +7,22 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          @foreach(App\Categorie::with('subCategorie')->where('parent', '=', '0' )->get() as $item)
-            @if($item->subCategorie->count()>0)
+          @foreach(App\Category::with('subCategory')->where('parent', '=', '0' )->get() as $item)
+            @if($item->subCategory->count()>0)
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{$item->name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  @foreach($item->subCategorie as $subCategorie)
-                    <a class="dropdown-item" href="#">{{$subCategorie->name}}</a>
+                  @foreach($item->subCategory as $subCategory)
+                    <a class="dropdown-item" href="{{ url('category/'. $subCategory->id . '/show') }}">{{$subCategory->name}}</a>
                   @endforeach
                 </div>
               </li>
             @else
               <li class="nav-item">
-                <a class="nav-link" href="#">{{$item->name}}</a>
+                <a class="nav-link" href="{{ url('category/'. $subCategory->id . '/show') }}">{{$item->name}}</a>
               </li>
             @endif
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categorie;
+use App\Category;
 use Illuminate\Http\Request;
 
-class CategorieController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        return Categorie::all();
+        return Category::paginate(4);
     }
 
     /**
@@ -44,10 +44,20 @@ class CategorieController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorie $categorie)
+    public function show(Category $category)
     {
-       	//dd($categoria); 
-        return $categorie;
+       	//dd($category); 
+       	//dd(Category::with('subCategory')->where('parent', '=', $category->id )->get());
+        return Category::with('subCategory')->where('parent', '=', $category->id )->get();
+    }
+    
+    public function showCategoryProducts($id)
+    {
+    		$category = Category::findOrFail($id);
+    		//dd($category);
+    		$products = $category->products;
+    		return view('categoryList', compact('products') ) ;
+    		
     }
 
     /**
@@ -56,7 +66,7 @@ class CategorieController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit(Category $category)
     {
         //
     }
@@ -68,7 +78,7 @@ class CategorieController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -79,7 +89,7 @@ class CategorieController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Category $category)
     {
         //
     }
