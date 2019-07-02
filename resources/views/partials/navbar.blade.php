@@ -22,7 +22,7 @@
               </li>
             @else
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('category/'. $subCategory->id . '/show') }}">{{$item->name}}</a>
+                <a class="nav-link" href="{{ url('category/'. $item->id . '/show') }}">{{$item->name}}</a>
               </li>
             @endif
 
