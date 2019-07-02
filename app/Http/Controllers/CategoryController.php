@@ -56,7 +56,8 @@ class CategoryController extends Controller
     		$category = Category::findOrFail($id);
     		//dd($category);
     		$products = $category->products;
-    		return view('categoryList', compact('products') ) ;
+    		$title = "Estas viendo los productos de la categoría " . $category->name;
+    		return view('categoryList', compact('products', 'title') ) ;
     		
     }
 

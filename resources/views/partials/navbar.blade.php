@@ -28,8 +28,8 @@
 
           @endforeach
           <li class="navCat">
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-1 icon" type="search" placeholder="" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="{{ url("search")  }}">
+              <input class="form-control mr-sm-1 icon" type="search" placeholder="" aria-label="Search" name="data">
               <a class="fas fa-search nav-item fa-lg icon" type="submit"></a>
             </form>
           </li>

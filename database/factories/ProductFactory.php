@@ -3,7 +3,7 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use App\Product;
-use App\Categorie;
+use App\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
@@ -17,6 +17,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'value' => $faker->randomFloat(2,100,1000),
         'image' => collect( ['imagen1.jpg', 'imagen2.jpg','imagen3.jpg','imagen4.jpg','imagen5.jpg','imagen6.jpg','imagen7.jpg',] )->random(),
         //'image' => $faker->image,
-        'categorie_id' => App\Categorie::get()->random()->id
+        'categorie_id' => App\Category::get()->random()->id
     ];
 });
