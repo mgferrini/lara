@@ -46,6 +46,8 @@
 
         @endforeach
 
+        {{ $products->links() }}
+
       </main> <!-- col.// -->
     </div>
 

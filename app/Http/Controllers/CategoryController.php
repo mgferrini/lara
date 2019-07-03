@@ -46,18 +46,21 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-       	//dd($category); 
+        //dd($category);
        	//dd(Category::with('subCategory')->where('parent', '=', $category->id )->get());
         return Category::with('subCategory')->where('parent', '=', $category->id )->get();
     }
     
     public function showCategoryProducts($id)
     {
-    		$category = Category::findOrFail($id);
-    		//dd($category);
-    		$products = $category->products;
-    		$title = "Estas viendo los productos de la categoría " . $category->name;
-    		return view('categoryList', compact('products', 'title') ) ;
+      $category = Category::findOrFail($id);
+      $parent = $category->parentCategory;
+      //dd($parent->name);
+      //dd($category);
+      $products = $category->products()->paginate(5);
+      //dd($products->links());
+      $title = "Estas viendo los productos de la categoría " . $category->name .' en '. $parent->name ;
+      return view('categoryList', compact('products', 'title') ) ;
     		
     }
 
