@@ -83,7 +83,7 @@
      */
     public function search(Request $req) {
       $q = $req->get( 'data' );
-      $products = \App\Product::where('name','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%')->get();
+      $products = \App\Product::where('name','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%')->paginate(5);
   
       //return view('categoryList', compact('products') ) ;
       return view('categoryList' )->with(

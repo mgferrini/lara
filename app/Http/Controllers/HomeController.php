@@ -13,8 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
-        $this->middleware('auth')->only('nombre_del_metodo');
+        $this->middleware('auth');
     }
 
     /**
@@ -27,8 +26,4 @@ class HomeController extends Controller
         return view('home');
     }
     
-    public function prueba($p,$m)
-    {
-        return $p . $m;
-    }
 }

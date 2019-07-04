@@ -1,15 +1,14 @@
 <?php
-
-namespace App\Http\Controllers\Auth;
-
-use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-
-class RegisterController extends Controller
-{
+  
+  namespace App\Http\Controllers\Auth;
+  
+  use App\User;
+  use App\Http\Controllers\Controller;
+  use Illuminate\Support\Facades\Hash;
+  use Illuminate\Support\Facades\Validator;
+  use Illuminate\Foundation\Auth\RegistersUsers;
+  
+  class RegisterController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -20,54 +19,64 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
+    
     use RegistersUsers;
-
+    
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/home';
-
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public function __construct() {
+      $this->middleware('guest');
     }
-
+    
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+    protected function validator(array $data) {
+      return Validator::make($data, ['name'       => ['required','string','max:255',],
+                                     //'first_name' => ['required','string','max:255',],
+                                     'last_name'  => ['required','string','max:255',],
+                                     'email'      => ['required','string','email','max:255','unique:users',],
+                                     'password'   => ['required','string','min:6','confirmed',],
+                                     'avatar'     => ['image',],
+                                     'terminos'   => ['accepted'],
+      ]);
     }
-
+    
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-        	agregar first_name, last_name, profile
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+    protected function create(array $data) {
+      //$folder = "public/avatars";
+      if( isset( $data['avatar'] )){
+        $rutaArchivo = $data['avatar']->store('public/avatars');
+        $nombreArchivo = basename($rutaArchivo);
+      }else{
+        $nombreArchivo = 'user_avatar.png';
+      }
+      return User::create([
+        'name' => $data['name'],
+        //'first_name' => $data['first_name'],
+        'last_name' => $data['last_name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'avatar' => $nombreArchivo,
+        'role' => 1,
         ]);
     }
-}
+  }

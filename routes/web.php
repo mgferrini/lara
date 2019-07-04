@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
     //return App\Category::with('subCategory')->where('parent', '=', '0' )->get();
 });
+Route::get('/perfil', 'Auth\PerfilController@index') ;
 
 Route::get('/category/{numero}/show', 'CategoryController@showCategoryProducts');
 
