@@ -55,11 +55,11 @@ class CategoryController extends Controller
     {
       $category = Category::findOrFail($id);
       $parent = $category->parentCategory;
-      //dd($parent->name);
+      //dd($parent);
       //dd($category);
       $products = $category->products()->paginate(5);
       //dd($products->links());
-      $title = "Estas viendo los productos de la categoría " . $category->name .' en '. $parent->name ;
+      $title = "Estas viendo los productos de la categoría " . $category->name . ( is_null($parent) ? "" : ' en '. $parent->name );
       return view('categoryList', compact('products', 'title') ) ;
     		
     }
